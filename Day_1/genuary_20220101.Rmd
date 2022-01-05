@@ -1,0 +1,51 @@
+---
+title: "Genuary 2022"
+author: "Day 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load_packages, warning = FALSE, message = FALSE}
+
+library(tidyverse)
+
+```
+
+```{r, fig.width = 10, fig.height = 10}
+
+coordinates <- 0:100
+shapes <- c(16, 20, 8)
+fill_color <- sample(x = coordinates, size = 10000, replace = TRUE)
+
+
+ggplot() +
+  
+  geom_jitter(aes(x      = sample(x = coordinates, size = 10000, replace = TRUE), 
+                  y      = sample(x = coordinates, size = 10000, replace = TRUE), 
+                  fill   = fill_color,
+                  color  = fill_color),
+              size   = sample(x = seq(from = 0.1, to = 2, by = 0.1), size = 10000, replace = TRUE),
+              alpha  = sample(x = seq(from = 0.01, to = 0.5, by = 0.1), size = 10000, replace = TRUE),
+              shape  = sample(x = shapes, size = 10000, replace = TRUE)) +
+  
+  scale_color_gradient2(low   = "white",
+                        high  = "#00a8f3") +
+  
+  coord_polar() +
+  
+  theme_void() +
+  
+  theme(legend.position = "none",
+        plot.background = element_rect(fill = "black"))
+
+```
+
+### Save plot
+```{r}
+
+ggsave(filename = here::here("2022", "Day_1", "genuary_day_1_plot.png"), device = "png", width = 10, height = 10)
+
+```
